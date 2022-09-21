@@ -2,7 +2,7 @@
 
 > Get latest floor prices for all collections in the WG ecosystem
 
-![demo](demo.png)
+![demo](demo-img.png)
 
 ### Scripts
 
