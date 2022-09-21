@@ -1,4 +1,4 @@
-# 🐺 WG Stats API
+# 🐺 WG Stats
 
 > Get latest floor prices for all collections in the WG ecosystem
 
