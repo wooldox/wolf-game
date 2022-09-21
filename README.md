@@ -2,6 +2,8 @@
 
 > Get latest floor prices for all collections in the WG ecosystem
 
+![demo](demo.png)
+
 ### Scripts
 
 #### `npm run start:dev`
