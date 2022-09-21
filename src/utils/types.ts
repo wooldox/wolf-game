@@ -1,4 +1,4 @@
-export type Order = {
+export interface Order {
   id: string;
   kind: string;
   side: string;
@@ -37,9 +37,9 @@ export type Order = {
   isReservoir: null;
   createdAt: string;
   updatedAt: string;
-};
+}
 
-export type Price = {
+export interface Price {
   currency: {
     contract: string;
     name: string;
@@ -58,25 +58,25 @@ export type Price = {
     usd: number;
     native: number;
   };
-};
+}
 
-export type DataSource = {
+export interface DataSource {
   id: string;
   name: string;
   icon: string;
   url: string;
-};
+}
 
-export type Attribute = {
+export interface Attribute {
   key: string;
   value: string;
   tokenCount: number;
   onSaleCount: number;
   floorAskPrice: number;
   topBidValue: number;
-};
+}
 
-export type Token = {
+export interface Token {
   token: {
     contract: string;
     tokenId: string;
@@ -95,19 +95,19 @@ export type Token = {
       source: DataSource;
     };
   };
-};
+}
 
-export type TokenResponse = {
+export interface TokenResponse {
   tokens: Token[];
   continuation?: string;
-};
+}
 
-export type TokenData = {
+export interface TokenData {
   tokenId: string;
   tokenType: string;
   tokenGen?: string;
   tokenAlpha?: string;
-};
+}
 
 export interface ListingData extends TokenData {
   tokenId: string;
@@ -115,34 +115,37 @@ export interface ListingData extends TokenData {
   market?: string;
 }
 
-export type AssetData = {
+export interface AssetData {
   floor: number | null;
   supply: number;
   listed: number;
-};
+}
 
 export type FloorsData = {
-  genZeroSheep: AssetData;
-  genOneSheep: AssetData;
-  genZeroA5: AssetData;
-  genZeroA6: AssetData;
-  genZeroA7: AssetData;
-  genZeroA8: AssetData;
-  genOneA5: AssetData;
-  genOneA6: AssetData;
-  genOneA7: AssetData;
-  genOneA8: AssetData;
-  farmerAvgJoe: AssetData;
-  farmerDiesel: AssetData;
-  farmerKid: AssetData;
-  farmerJane: AssetData;
-  farmerHundred: AssetData;
-  farmerMama: AssetData;
-  farmerDaddy: AssetData;
-  lands: AssetData;
-  pouches: AssetData;
-  merchSheepSocks: AssetData;
-  merchWolfSocks: AssetData;
-  merchBeanie: AssetData;
-  merchHoodie: AssetData;
+  [key in TokenType]: AssetData;
 };
+
+export type TokenType =
+  | 'genZeroSheep'
+  | 'genOneSheep'
+  | 'genZeroA5'
+  | 'genZeroA6'
+  | 'genZeroA7'
+  | 'genZeroA8'
+  | 'genOneA5'
+  | 'genOneA6'
+  | 'genOneA7'
+  | 'genOneA8'
+  | 'farmerAvgJoe'
+  | 'farmerDiesel'
+  | 'farmerKid'
+  | 'farmerJane'
+  | 'farmerHundred'
+  | 'farmerMama'
+  | 'farmerDaddy'
+  | 'lands'
+  | 'pouches'
+  | 'merchSheepSocks'
+  | 'merchWolfSocks'
+  | 'merchBeanie'
+  | 'merchHoodie';

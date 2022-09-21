@@ -1,5 +1,4 @@
 import * as fs from 'fs';
-import * as _ from 'lodash';
 import { Token } from '../../utils/types';
 import { getTokens } from '../../helpers/tokens';
 
@@ -12,10 +11,11 @@ const farmers = async (): Promise<void> => {
   const data = await getTokens(contract, []);
   const tokens = data?.tokens.map((t: Token) => {
     const td = t.token;
+    const tokenImage = td.image;
     const tokenId = td.tokenId;
     const tokenType =
       td.attributes.find((a) => a.key == 'Type')?.value || 'UNK';
-    return { tokenId, tokenType };
+    return { tokenId, tokenImage, tokenType };
   });
   fs.writeFileSync('./farmers.json', JSON.stringify(tokens, null, 2));
 };

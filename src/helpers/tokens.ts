@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
+
 import axios from 'axios';
 import { Token, TokenResponse } from '../utils/types';
 import { delay } from '../utils/delay';
 import { handleError } from './error';
 
 const api = 'https://api.reservoir.tools/tokens/v5';
-const params = 'sortBy=floorAskPrice&limit=50&includeAttributes=true';
+const params = 'sortBy=tokenId&limit=100&includeAttributes=true';
 
 /**
  * Fetch all tokens for a collection

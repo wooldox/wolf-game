@@ -18,6 +18,11 @@ import minimist from 'minimist';
         await tokens.farmers();
         console.info('tokens data saved in farmers.json');
       }
+      if (args.tokens == 'lands') {
+        console.info('fetching latest land tokens');
+        await tokens.lands();
+        console.info('tokens data saved in lands.json');
+      }
     } else {
       console.log('fetching floor prices');
       const floorData = await floors.fromOrders();

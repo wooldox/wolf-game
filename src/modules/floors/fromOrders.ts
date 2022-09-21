@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import * as _ from 'lodash';
 import { findTokenData, assignFloors } from '../../helpers/floors';
@@ -93,15 +94,42 @@ export const findPouchCount = async (): Promise<string> => {
 };
 
 /**
+ * Loop through orders
+ * @returns orders array
+ */
+const getDataPage = async (
+  cursor?: string | null,
+): Promise<{ orders: Order[]; continuation?: string } | null> => {
+  const contractAddys = Object.values(contracts).join('&contracts=');
+  const base = `${api}/${endpoint}?contracts=${contractAddys}${params}`;
+  const url = cursor ? `${base}&continuation=${cursor}` : base;
+  try {
+    const { data } = await axios.get<{
+      orders: Order[];
+      continuation?: string;
+    }>(url);
+    return data;
+  } catch (error) {
+    return handleError(error as any);
+  }
+};
+
+/**
  * Get the orders for all defined contracts
  * @returns orders array
  */
-const getData = async (): Promise<ListingData[] | null> => {
-  const contractAddys = Object.values(contracts).join('&contracts=');
-  const url = `${api}/${endpoint}?contracts=${contractAddys}${params}`;
+const getData = async (
+  listings: Order[] = [],
+  cursor: string | null = null,
+): Promise<ListingData[] | null> => {
   try {
-    const { data } = await axios.get<{ orders: Order[] }>(url);
-    return data?.orders ? _.sortBy(assign(data.orders), (a) => a.price) : null;
+    const pageData = await getDataPage(cursor);
+    if (pageData?.orders) {
+      const { orders, continuation } = pageData;
+      listings.push(...orders);
+      if (continuation) return await getData(listings, continuation);
+    }
+    return listings ? _.sortBy(assign(listings), (a) => a.price) : null;
   } catch (error) {
     return handleError(error as any);
   }

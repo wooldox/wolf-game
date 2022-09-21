@@ -14,7 +14,11 @@ Fetch and save all farmer tokens into `farmers.json`
 
 #### `npm run start:dev -- --tokens=animals`
 
-Fetch and save all animal tokens into `farmers.json`
+Fetch and save all animal tokens into `animals.json`
+
+#### `npm run start:dev -- --tokens=lands`
+
+Fetch and save all animal tokens into `lands.json`
 
 #### `npm run test`
 
@@ -26,8 +30,8 @@ Run the `jest` tests in watch mode, waiting for file changes.
 
 #### `npm run prettier-format`
 
-Format your code.
+Format the code.
 
 #### `npm run prettier-watch`
 
-Format your code in watch mode, waiting for file changes.
+Format the code in watch mode, waiting for file changes.
